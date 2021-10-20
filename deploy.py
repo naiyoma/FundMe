@@ -39,9 +39,9 @@ bytecode = compiled_sol["contracts"]["SimpleStorage.sol"][
 # get abi
 abi = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["abi"]
 # pdb; pdb.set_trace()
-w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
-chain_id = 1337
-my_address = "0x23cf32dd4Adce7a4021EAFA0f66c1310824eEf6C"
+w3 = Web3(Web3.HTTPProvider("https://kovan.infura.io/v3/a5b6a7d9d6fd4899a0390452946ea3ec"))
+chain_id = 42
+my_address = "0x2F2691D4395b9510Dc9747658C3f294AFB30d135"
 private_key = os.getenv("PRIVATE_KEY")
 
 # createthecontract in python
