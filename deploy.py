@@ -55,4 +55,6 @@ transaction = SimpleStorage.constructor().buildTransaction(
     {"chainId": chain_id, "from": my_address,"nonce": nonce}
 )
 #sign the address using a private key
-pdb; pdb.set_trace()
+signed_txn = w3.eth.account.sign_transaction(transaction, private_key=private_key)
+#send the signed transaction
+tx_hash = w3.eth.send_raw_transaction((signed_txn.rawTransaction))
