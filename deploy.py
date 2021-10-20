@@ -1,7 +1,11 @@
 import pdb
+import os
 import json
 from web3 import Web3
+from dotenv import load_dotenv
 from solcx import compile_standard, install_solc
+
+
 with open("./SimpleStorage.sol", "r") as file:
     simple_storage_file = file.read()
     print(simple_storage_file)
@@ -38,7 +42,7 @@ abi = compiled_sol["contracts"]["SimpleStorage.sol"]["SimpleStorage"]["abi"]
 w3 = Web3(Web3.HTTPProvider("HTTP://127.0.0.1:7545"))
 chain_id = 1337
 my_address = "0xAfEd3A49a7EA22155F38063b06A17C11Fe2251e3"
-private_key = "0xa00e8effcd76964a452ba8c1acd6d70b374a95ce478127d379c10dee40e8012d"
+private_key = os.getenv("PRIVATE_KEY")
 
 # createthecontract in python
 SimpleStorage = w3.eth.contract(abi=abi, bytecode=bytecode)
