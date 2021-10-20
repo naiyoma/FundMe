@@ -21,6 +21,7 @@ compiled_sol = compile_standard(
             }
         },
     },
+    solc_version="0.6.0",
 )
 
 with open("compiled_code.json", "w") as file:
