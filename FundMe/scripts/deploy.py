@@ -1,4 +1,4 @@
-from brownie import FundMe, network, config
+from brownie import FundMe, network, config, MockV3Aggregator
 from .help_scripts import get_account
 
 def deploy_fund_me():
@@ -7,11 +7,14 @@ def deploy_fund_me():
         price_feed = config["networks"][network.show_active()][
             "eth_usd_price_feed"
         ]
+    else:
+        print("The active network is active")
+        print("deploy mocks......")
+
     fund_me = FundMe.deploy(
         price_feed,
         {"from": account},
         publish_source=True)
-    # import pdb; pdb.set_trace()
 
 def main():
     deploy_fund_me()
