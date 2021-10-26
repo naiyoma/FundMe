@@ -18,7 +18,12 @@ contract Lottery {
         players.push(msg.sender);
     }
     //user to deposit EtH
-    function getEntraceFee() pubic{}
+    function getEntraceFee() pubic view returns (uint256) {
+        (, int256 price, , , ,) = ethUsdPriceFeed.latestRoundData;
+        uint256 new_price = uint256(price) * 10**10;
+        uint256 costToEnter = (usdEntry * 10**18) / price;
+        return costToEntre;
+    }
     //start the lottery
     function endLottery() public {}
     //end
