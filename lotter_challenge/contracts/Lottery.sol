@@ -19,11 +19,22 @@ contract Lottery is Ownable, VRFConsumerBase{
     // 1
     // 2
     LOTTERY_STATE public lottery_state;
+    uint256 public fee;
+    bytes32 public keyhash;
     //set entry fee
-    constructor(address _priceFeedAddress) public {
+    constructor(
+        address _priceFeedAddress,
+        address _vrfCoordinator,
+        address _link,
+        uint256 _fee;
+        bytes32 _keyhash;
+    )
+        public VRFConsumerBase(_vrfCoordinator, _link) {
         entryFee = 50*(10**18);
         ethUsdPriceFeed = AggregatorV3Interface(_priceFeedAddress);
         lottery_state = LOTTERY_STATE.CLOSED;
+        fee = _fee;
+        keyhash = _keyhash;
     }
     function enter() public payable{
         require(lottery_state == LOTTERY_STATE.OPEN);
@@ -46,5 +57,8 @@ contract Lottery is Ownable, VRFConsumerBase{
         lottery_state = LOTTERY_STATE.OPEN;
     }
     //end
-    // function endLottery() public {}
+    function endLottery() public {
+        lottery_state = LOTTERY_STATE.CALCULATING_WINNER;
+        bytes32 requestId = requestRandomness(keyhash, fee);
+    }
 }
