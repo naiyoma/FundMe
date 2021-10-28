@@ -9,7 +9,7 @@ TEST
 3. `testnet`
 
 ## AAVE Brownie Test
-`1.Deposit some ETH into AAVE`
-`2.Borrow some Assests with ETH as the collateral.`
-`3. Short Sell.`
-`4.Repay Everything Back.`
+1.`Deposit some ETH into AAVE`
+2.`Borrow some Assests with ETH as the collateral.`
+3.` Short Sell.`
+4.`Repay Everything Back.`
