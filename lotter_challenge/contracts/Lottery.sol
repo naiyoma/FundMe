@@ -3,13 +3,13 @@ pragma solidity ^0.6.6;
 
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
+import "@chainlink/contracts/src/v0.6/VRFConsumerBase.sol";
 
 contract Lottery is Ownable, VRFConsumerBase{
     //user enter the competition
     address payable[] public players;
-    address public recentwinnner;
-    address public randomness;
+    address payable public recentwinnner;
+    uint256 public randomness;
     uint256 public entryFee;
     AggregatorV3Interface internal ethUsdPriceFeed;
     enum LOTTERY_STATE {
@@ -28,8 +28,8 @@ contract Lottery is Ownable, VRFConsumerBase{
         address _priceFeedAddress,
         address _vrfCoordinator,
         address _link,
-        uint256 _fee;
-        bytes32 _keyhash;
+        uint256 _fee,
+        bytes32 _keyhash
     )
         public VRFConsumerBase(_vrfCoordinator, _link) {
         entryFee = 50*(10**18);
@@ -75,7 +75,6 @@ contract Lottery is Ownable, VRFConsumerBase{
         uint256 indexOfWinner = _randomness % players.length;
         recentwinnner = players[indexOfWinner];
         recentwinnner.transfer(address(this).balance);
-        // Reset
         players = new address payable[](0);
         lottery_state = LOTTERY_STATE.CLOSED;
         randomness = _randomness;
