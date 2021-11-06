@@ -12,6 +12,8 @@ breed_to_image_uri = {
     "ST_BERNARD": "https://ipfs.io/ipfs/QmUPjADFGEKmfohdTaNcWhp7VGk26h5jXDA7v3VtTnTLcW?filename=st-bernard.png",
 }
 
+
+# create metadata
 def main():
     advanced_collectible = AdvancedCollectible[-1]
     number_of_advanced_collectibles = advanced_collectible.tokenCounter()
